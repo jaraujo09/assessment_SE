@@ -7,7 +7,7 @@ from zipfile import ZipFile
 from io import BytesIO
 import os
 import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup
+import boto3
 
 class GetData:
     """
@@ -102,7 +102,9 @@ class GetData:
                     if file_name.endswith('.xml'):
                         logging.info(f"Extracting -> [{file_name}]")
                         with z.open(file_name) as xml_file:
-                            return xml_file.read().decode("utf-8")
+                            with open(file_name, "wb") as f:
+                                f.write(xml_file.read())
+                            return file_name
             logging.error(f"No XML file found")
             return None
         
@@ -111,12 +113,12 @@ class GetData:
             return None
         
     
-    def create_csv(xml_file, csv_path):
+    def create_csv(xml_content, csv_path):
 
-        """Creates CSV from XML File.
+        """Creates CSV from XML content.
 
         Args:
-            xml_file (str): Path of XML file.
+            xml_content (str): XML content.
             csv_path (str): Path to write the CSV file.
 
         Returns:
@@ -132,8 +134,9 @@ class GetData:
             # csv_fname = os.path.basename(xml_file).rsplit(".", 1)[0] + ".csv"
             csv_file = os.path.join(csv_path)
 
-            logging.info("Loading the XML file.")
-            xml_iter = ET.iterparse(xml_file, events=("start",))
+            logging.info("Loading the XML content.")
+            # xml_iter = ET.fromstring(xml_content)#, events=("start",))
+            xml_iter = ET.iterparse(xml_content, events=("start",))
 
             csv_columns = [
                 "FinInstrmGnlAttrbts.Id",
@@ -147,8 +150,8 @@ class GetData:
             extracted_data = []
             logging.info("Parsing the XML file and extracting data.")
 
-            for event, element in xml_iter:
-                if event == "start" and "TermntdRcrd" in element.tag:
+            for event,element in xml_iter:
+                 if event == "start" and "TermntdRcrd" in element.tag:
                     data = {}
                     for elem in element:
                         if "FinInstrmGnlAttrbts" in elem.tag:
@@ -218,3 +221,33 @@ class GetData:
         except Exception as e:
             logging.error(f"An error occurred: {e}")
             return None
+        
+    
+    def store2aws(self, file:str, access_id:str, access_key:str, region:str, bucket:str)->bool:
+        """
+        Stores the file to AWS S3 bucket
+
+        :param file: path of the file to be stored
+        :param region: AWS region
+        :param bucket: AWS S3 bucket name
+
+        :return: True if the file is stored successfully, False otherwise
+        """
+        try:
+            logging.info(f"Creating AWS S3 object")
+            s3 = boto3.resource(service_name= 's3', 
+                              region_name=region,
+                              aws_access_key_id=access_id,
+                            aws_secret_access_key=access_key
+                              )
+
+            logging.info("Uploading to s3 bucket")
+            s3.Bucket(bucket).upload_file(Filename=file, Key=file)
+            logging.info(f"File stored in AWS S3 bucket: {bucket}")
+            return True
+        
+        except Exception as e:
+            logging.error(f"Error storing file to AWS S3 bucket: {e}")
+            return False
+        
+        # not sure if this works, no credentials to test

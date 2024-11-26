@@ -33,15 +33,18 @@ def test_get_data():
     if not extracted_xml_content:
         logging.error("Failed to download or extract ZIP")
         return
+    
 
     logging.info(f"Extracted XML content:\n{extracted_xml_content[:500]}")  # showing first 500 characters for brevity
-    
-def test_converting_xml2csv():
+    return extracted_xml_content
+
+def test_converting_xml2csv(xml_content):
     # Sample XML content (shortened for clarity)
-    xml_content = "DLTINS_20210117_01of01.xml"
+    # xml_content = "DLTINS_20210119_01of02.xml"
+    print(xml_content)
     test_csv_path = "./output/test_output.csv"
     # download_extract_zip = GetData.download_extract_zip
-    GetData.create_csv(xml_file=xml_content, csv_path=test_csv_path)
+    GetData.create_csv(xml_content=xml_content, csv_path=test_csv_path)
 
     
     assert os.path.exists(test_csv_path), "CSV file was not created!"
@@ -83,7 +86,9 @@ def test_add_columns():
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
 
+
 # Run the test
-test_get_data()
-test_converting_xml2csv()
+xml_content = test_get_data()
+test_converting_xml2csv(xml_content)
 test_add_columns()
+
