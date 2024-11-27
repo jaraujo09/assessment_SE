@@ -1,22 +1,22 @@
-2024-11-26 19:12:58,155 - INFO - Step 1: Downloading XML
-2024-11-26 19:12:58,155 - INFO - Downloading XML file from [https://registers.esma.europa.eu/solr/esma_registers_firds_files/select?q=*&fq=publication_date:%5B2021-01-17T00:00:00Z+TO+2021-01-19T23:59:59Z%5D&wt=xml&indent=true&start=0&rows=100]...
-2024-11-26 19:12:58,543 - INFO - XML downloaded successfully
-2024-11-26 19:12:58,543 - INFO - Step 2: Extracting DLTINS file link
-2024-11-26 19:12:58,543 - INFO - Processing XML file...
-2024-11-26 19:12:58,543 - INFO - Second DLTINS file found: https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip
-2024-11-26 19:12:58,543 - INFO - DLTINS file link: https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip
-2024-11-26 19:12:58,543 - INFO - Step 3: Downloading and extracting ZIP
-2024-11-26 19:12:58,543 - INFO - Downloading ZIP file from [https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip]...
-2024-11-26 19:13:00,986 - INFO - Extracting -> [DLTINS_20210119_01of02.xml]
-2024-11-26 19:13:02,080 - INFO - Extracted XML content:
+2024-11-27 11:11:17,332 - INFO - Step 1: Downloading XML
+2024-11-27 11:11:17,332 - INFO - Downloading XML file from [https://registers.esma.europa.eu/solr/esma_registers_firds_files/select?q=*&fq=publication_date:%5B2021-01-17T00:00:00Z+TO+2021-01-19T23:59:59Z%5D&wt=xml&indent=true&start=0&rows=100]...
+2024-11-27 11:11:17,564 - INFO - XML downloaded successfully
+2024-11-27 11:11:17,564 - INFO - Step 2: Extracting DLTINS file link
+2024-11-27 11:11:17,564 - INFO - Processing XML file...
+2024-11-27 11:11:17,564 - INFO - Second DLTINS file found: https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip
+2024-11-27 11:11:17,564 - INFO - DLTINS file link: https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip
+2024-11-27 11:11:17,564 - INFO - Step 3: Downloading and extracting ZIP
+2024-11-27 11:11:17,564 - INFO - Downloading ZIP file from [https://firds.esma.europa.eu/firds/DLTINS_20210119_01of02.zip]...
+2024-11-27 11:11:18,087 - INFO - Extracting -> [DLTINS_20210119_01of02.xml]
+2024-11-27 11:11:18,958 - INFO - Extracted XML content:
 DLTINS_20210119_01of02.xml
-2024-11-26 19:13:02,080 - INFO - Loading the XML content.
-2024-11-26 19:13:03,834 - INFO - Parsing the XML file and extracting data.
-2024-11-26 19:13:26,280 - INFO - All required data extracted. Creating DataFrame.
-2024-11-26 19:13:26,316 - INFO - Writing data to CSV file.
-2024-11-26 19:13:26,316 - INFO - ./output/test_output.csv
-2024-11-26 19:13:26,423 - INFO - CSV file created successfully at ./output/test_output.csv
-2024-11-26 19:13:27,327 - INFO - Adding columns 'a_count' and 'contains_a'...
-2024-11-26 19:13:27,361 - INFO - Columns added
-2024-11-26 19:13:27,361 - INFO - Saving new csv
-2024-11-26 19:13:27,440 - INFO - New csv saved with all info
+2024-11-27 11:11:18,958 - INFO - Loading the XML content.
+2024-11-27 11:11:20,479 - INFO - Parsing the XML file and extracting data.
+2024-11-27 11:11:37,947 - INFO - All required data extracted. Creating DataFrame.
+2024-11-27 11:11:37,985 - INFO - Writing data to CSV file.
+2024-11-27 11:11:37,985 - INFO - ./output/test_output.csv
+2024-11-27 11:11:38,040 - INFO - CSV file created successfully at ./output/test_output.csv
+2024-11-27 11:11:38,678 - INFO - Adding columns 'a_count' and 'contains_a'...
+2024-11-27 11:11:38,692 - INFO - Columns added
+2024-11-27 11:11:38,692 - INFO - Saving new csv
+2024-11-27 11:11:38,742 - INFO - New csv saved with all info
